@@ -137,5 +137,5 @@ def find(musicType, query, type, sort, reverse):
                     output.append(iem)
     json.dump(output, open("searchResults.json", "w"))
     #print(musicType, sort, reverse) #debug
-    listSort(musicType, sort, reverse)
+    listSort('searchResults.json', sort, reverse)
     printList("searchResults.json")
