@@ -14,11 +14,11 @@ def getType():
         print("No type specified. Choose either IEMS or Headphones.")
         sys.exit(1)
 
-def getModel():
+def getQuery():
     try:
         return sys.argv[3]
     except IndexError:
-        print("No model specified.")
+        print("No Query specified.")
         sys.exit(1)
 
 def getSort():
@@ -31,5 +31,23 @@ def getSort():
 def getReversed():
     try:
         return bool(sys.argv[4])
+    except IndexError:
+        return False
+
+def getQuerySearch():
+    try:
+        return sys.argv[4]
+    except IndexError:
+        return 'all'
+
+def getSort2():
+    try:
+        return sys.argv[5]
+    except IndexError:
+        return 'rank'
+
+def getReversed2():
+    try:
+        return bool(sys.argv[6])
     except IndexError:
         return False

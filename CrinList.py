@@ -12,9 +12,9 @@ def main():
     elif cmd == "-l" or cmd == "--list":
         printList(getType())
     elif cmd == "-s" or cmd == "--sort":
-        sort(getType(), getSort(), getReversed())
+        listSort(getType(), getSort(), getReversed())
     elif cmd == "-se" or cmd == "--search":
-        find(getType(), getModel())
+        find(getType(), getQuery(), getQuerySearch(), getSort2(), getReversed2())
     elif cmd == "-f" or cmd == "--filter":
         pass #TODO
 

@@ -1,6 +1,7 @@
 import json
 import termcolor
 import math
+import re
 
 def determineColor(rank):
     switchDict = {
@@ -84,36 +85,57 @@ def stringSort(val):
 def printList(musicType):
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
-        for iem in file:
-            stars = iem['stars']*"*"
-            #print(iem['rank']) #debug
-            print(termcolor.colored(iem['rank'] + " " + stars + " " + iem['name'], color=determineColor(iem['rank'])), end=" ")
-            print(iem['price'] + " " + iem['signature'] + " " + iem['comment'], end=" ")
-            print(termcolor.colored(iem['tone'], color=determineColor(iem['tone'])), end=" ")
-            print(termcolor.colored(iem['technical'], color=determineColor(iem['technical'])), end=" ")
-            print(termcolor.colored(" " + iem['graph'], color="blue"), end=" ")
-            print(iem['setup'] + " " + iem['basedOn'] + " " + iem["noteWeight"], end="\n\n")
+
     elif musicType == "Headphones":
         pass
+    else:
+        file = json.loads(open(musicType).read())
+    for device in file:
+        stars = device['stars']*"*"
+        #print(device['rank']) #debug
+        print(termcolor.colored(device['rank'] + " " + stars + " " + device['name'], color=determineColor(device['rank'])), end=" ")
+        print(device['price'] + " " + device['signature'] + " " + device['comment'], end=" ")
+        print(termcolor.colored(device['tone'], color=determineColor(device['tone'])), end=" ")
+        print(termcolor.colored(device['technical'], color=determineColor(device['technical'])), end=" ")
+        print(termcolor.colored(" " + device['graph'], color="blue"), end=" ")
+        print(device['setup'] + " " + device['basedOn'] + " " + device["noteWeight"], end="\n\n")
     
-def sort(musicType, sort, reverse):
+def listSort(musicType, sort, reverse):
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
-        if sort == "rank" or sort == "tone" or sort == "technical":
-            file.sort(key=lambda x: rankNumber(x[sort]), reverse=not reverse)
-        elif sort == "stars":
-            file.sort(key=lambda x: x['stars'], reverse=reverse)
-        elif sort == "name" or sort == "model":
-            file.sort(key=lambda x: x['name'], reverse=not reverse)
-        elif sort == "price" or sort == "noteWeight":
-            file.sort(key=lambda x : intSort(x[sort]), reverse=reverse)
-        elif sort == "signature" or sort == "comment" or sort == "setup" or sort == "basedOn":
-            file.sort(key=lambda x: stringSort(x[sort]), reverse=reverse)
-        
-        json.dump(file, open("IEMList.json", "w"))
-    else:
+    elif musicType == "Headphones":
         pass
-    pass
+    else:
+        file = json.loads(open(musicType).read())
 
-def find(musicType, model):
-    pass
+    if sort == "rank" or sort == "tone" or sort == "technical":
+        file.sort(key=lambda x: rankNumber(x[sort]), reverse=not reverse)
+    elif sort == "stars":
+        file.sort(key=lambda x: x['stars'], reverse=reverse)
+    elif sort == "name" or sort == "model":
+        file.sort(key=lambda x: x['name'], reverse=not reverse)
+    elif sort == "price" or sort == "noteWeight":
+        file.sort(key=lambda x : intSort(x[sort]), reverse=reverse)
+    elif sort == "signature" or sort == "comment" or sort == "setup" or sort == "basedOn":
+        file.sort(key=lambda x: stringSort(x[sort]), reverse=reverse)
+    
+    json.dump(file, open("IEMList.json", "w"))
+
+def find(musicType, query, type, sort, reverse):
+    query = query.lower()
+    output = []
+    #print(query) #debug
+    if musicType == "IEM":
+        file = json.loads(open("IEMList.json").read())
+        for iem in file:
+            if type == 'all': #search all fields if type isn't specified
+                if query in iem['rank'].lower() or query in iem['name'].lower() or query in iem['signature'].lower() or query in iem['comment'].lower() or query in iem['tone'].lower() or query in iem['technical'].lower() or query in iem['graph'].lower() or query in iem['setup'].lower() or query in iem['basedOn'].lower():
+                    output.append(iem)
+            else:
+                #print(iem[type]) #debug
+                if query in iem[type].lower():
+                    output.append(iem)
+    json.dump(output, open("searchResults.json", "w"))
+    #print(musicType, sort, reverse) #debug
+    listSort(musicType, sort, reverse)
+    printList("searchResults.json")
