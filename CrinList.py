@@ -6,12 +6,16 @@ def main():
     createIEM() #creates JSON of IEM if it doesn't exist
     createHeadphones() #creates JSON of headphones if it doesn't exist
     cmd = getCmd()
+    #print(cmd) #debug
     if cmd == "-h" or cmd == "--help":
         printHelp()
     elif cmd == "-l" or cmd == "--list":
-        printList()
+        printList(getType())
     elif cmd == "-s" or cmd == "--sort":
         sort(getType(), getSort())
-    elif cmd == "-f" or cmd == "--find":
+    elif cmd == "-se" or cmd == "--search":
         find(getType(), getModel())
-    
+    elif cmd == "-f" or cmd == "--filter":
+        pass #TODO
+
+main()

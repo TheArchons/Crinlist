@@ -1,8 +1,29 @@
+import sys
+
 def getCmd():
-    pass
+    try:
+        #print(sys.argv[1]) #debug
+        return sys.argv[1]
+    except IndexError:
+        return '-h'
+
 def getType():
-    pass
+    try:
+        return sys.argv[2]
+    except IndexError:
+        print("No type specified. Choose either IEMS or Headphones.")
+        sys.exit(1)
+
 def getModel():
-    pass
+    try:
+        return sys.argv[3]
+    except IndexError:
+        print("No model specified.")
+        sys.exit(1)
+
 def getSort():
-    pass
+    try:
+        return sys.argv[3]
+    except IndexError:
+        print("No sort specified. Choose From: Rank, Price, Value, Model, Signature, Tone Grade, Technical Grade, or Setup.")
+        sys.exit(1)
