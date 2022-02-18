@@ -27,3 +27,9 @@ def getSort():
     except IndexError:
         print("No sort specified. Choose From: Rank, Price, Value, Model, Signature, Tone Grade, Technical Grade, or Setup.")
         sys.exit(1)
+
+def getReversed():
+    try:
+        return bool(sys.argv[4])
+    except IndexError:
+        return False

@@ -12,7 +12,7 @@ def main():
     elif cmd == "-l" or cmd == "--list":
         printList(getType())
     elif cmd == "-s" or cmd == "--sort":
-        sort(getType(), getSort())
+        sort(getType(), getSort(), getReversed())
     elif cmd == "-se" or cmd == "--search":
         find(getType(), getModel())
     elif cmd == "-f" or cmd == "--filter":
