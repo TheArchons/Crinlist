@@ -88,7 +88,11 @@ def printList(musicType):
             stars = iem['stars']*"*"
             #print(iem['rank']) #debug
             print(termcolor.colored(iem['rank'] + " " + stars + " " + iem['name'], color=determineColor(iem['rank'])), end=" ")
-            print(iem['price'] + " " + iem['signature'] + " " + iem['comment'] + " " + iem['tone'] + " " + iem['technical'] + " " + iem['graph'] + " " + iem['setup'] + " " + iem['basedOn'] + " " + iem["noteWeight"], end="\n\n")
+            print(iem['price'] + " " + iem['signature'] + " " + iem['comment'], end=" ")
+            print(termcolor.colored(iem['tone'], color=determineColor(iem['tone'])), end=" ")
+            print(termcolor.colored(iem['technical'], color=determineColor(iem['technical'])), end=" ")
+            print(termcolor.colored(" " + iem['graph'], color="blue"), end=" ")
+            print(iem['setup'] + " " + iem['basedOn'] + " " + iem["noteWeight"], end="\n\n")
     elif musicType == "Headphones":
         pass
     
