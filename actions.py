@@ -2,6 +2,8 @@ import json
 import termcolor
 import math
 import re
+import os
+from create import *
 
 def determineColor(rank):
     switchDict = {
@@ -68,10 +70,10 @@ def printHelp():
     print("Usage: python CrinList.py [OPTION]")
     print("Options:")
     print("-h   --help      Display this help message")
-    print("-l   --list      List all rankings")
-    print("-s   --sort      Sort rankings by type")
-    print("-se  --search    Search rankings by model")
-    print("-f   --filter    Filter rankings by type")
+    print("-l   --list      List all rankings   format: -l [IEM, Headphones]")
+    print("-s   --sort      Sort rankings by type   format: -s [IEM, Headphones] [rank, tone, technical, stars, name, model, price, noteWeight, signature, comment, setup, basedOn] [reverse]")
+    print("-se  --search    Search rankings     format -se [IEM, Headphones] [search term] [rank, tone, technical, stars, name, model, price, noteWeight, signature, comment, setup, basedOn] [reverse] [strict]")
+    print("-u   --update    Update rankings     format: -u [IEM, Headphones, all]")
 
 def intSort(val):
     try:
@@ -135,7 +137,7 @@ def listSort(musicType, sort, reverse):
     #json.dump(file, open(musicType, "w"))
     #json.dump(file, open("IEMList.json", "w"))
 
-def find(musicType, query, type, sort, reverse):
+def find(musicType, query, type, sort, reverse, strict):
     query = query.lower()
     output = []
     #print(query) #debug
@@ -158,3 +160,17 @@ def find(musicType, query, type, sort, reverse):
     #print(musicType, sort, reverse) #debug
     listSort('searchResults.json', sort, reverse)
     printList("searchResults.json")
+
+
+def update(type):
+    if type == "IEM":
+        os.remove("IEMList.json")
+        print("updated")
+    elif type == "Headphones":
+        os.remove("HeadphoneList.json")
+        print("updated")
+    elif type == "all":
+        os.remove("IEMList.json")
+        os.remove("HeadphoneList.json")
+        createIEM()
+        print("updated")

@@ -30,7 +30,10 @@ def getSort():
 
 def getReversed():
     try:
-        return bool(sys.argv[4])
+        if sys.argv[4] == 'reverse':
+            return True
+        else:
+            return False
     except IndexError:
         return False
 

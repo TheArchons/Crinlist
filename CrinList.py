@@ -16,6 +16,6 @@ def main():
     elif cmd == "-se" or cmd == "--search":
         find(getType(), getQuery(), getQuerySearch(), getSort2(), getReversed2(), getStrict())
     elif cmd == "-u" or cmd == "--update":
-        pass #TODO
+        update(getType())
 
 main()
