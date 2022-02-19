@@ -1,5 +1,16 @@
+from ParseIntoJSON import parse
+
 def createIEM():
-    pass
+    try:
+        open('IEMList.json', 'r') #check if file exists
+    except FileNotFoundError:
+        #print('IEMList.json not found. Creating...') #debug
+        parse('IEM.html', 'IEMList.json')
+    
 
 def createHeadphones():
-    pass
+    try:
+        open('HeadphoneList.json', 'r') #check if file exists
+    except FileNotFoundError:
+        #print('HeadphoneList.json not found. Creating...') #debug
+        parse('Headphone.html', 'HeadphoneList.json')

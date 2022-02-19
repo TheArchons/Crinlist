@@ -2,6 +2,8 @@ import json, math
 
 
 def parse(source, output):
+    file = open(source, 'r', encoding='utf-8')
+    saveFile = open(output, 'w', encoding='utf-8')
     data = []
     for line in file:
         if line[:34] == '<td class="column-1"><span class="':
@@ -69,8 +71,8 @@ def parse(source, output):
     file.close()
     saveFile.close()
 
-filePath = input('Enter the file path: ')
-file = open(filePath, 'r', encoding='utf-8')
-saveLocation = input('Enter the save location: ')
-saveFile = open(saveLocation, 'w', encoding='utf-8')
-parse(file, saveFile)
+def main():
+    filePath = input('Enter the file path: ')
+    saveLocation = input('Enter the save location: ')
+    parse(filePath, saveLocation)
+
