@@ -83,11 +83,11 @@ def stringSort(val):
     return len(val)
 
 def printList(musicType):
+    #print(musicType) #debug
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
-
     elif musicType == "Headphones":
-        pass
+        file = json.loads(open("HeadphoneList.json").read())
     else:
         file = json.loads(open(musicType).read())
     for device in file:
@@ -104,10 +104,11 @@ def listSort(musicType, sort, reverse):
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
     elif musicType == "Headphones":
-        pass
+        file = json.loads(open("HeadphoneList.json").read())
     else:
         file = json.loads(open(musicType).read())
-
+    
+    #print(file) #debug
     if sort == "rank" or sort == "tone" or sort == "technical":
         file.sort(key=lambda x: rankNumber(x[sort]), reverse=not reverse)
     elif sort == "stars":
@@ -119,7 +120,20 @@ def listSort(musicType, sort, reverse):
     elif sort == "signature" or sort == "comment" or sort == "setup" or sort == "basedOn":
         file.sort(key=lambda x: stringSort(x[sort]), reverse=reverse)
     
-    json.dump(file, open("IEMList.json", "w"))
+    if musicType == "IEM":
+        with open("IEMList.json", "w") as outfile:
+            json.dump(file, outfile)
+    elif musicType == "Headphones":
+        with open("HeadphoneList.json", "w") as outfile:
+            json.dump(file, outfile)
+    else:
+        #print(musicType) #debug
+        #print(file) #debug
+        with open(musicType, "w") as outfile:
+            json.dump(file, outfile)
+    #print(file)
+    #json.dump(file, open(musicType, "w"))
+    #json.dump(file, open("IEMList.json", "w"))
 
 def find(musicType, query, type, sort, reverse):
     query = query.lower()
@@ -127,14 +141,19 @@ def find(musicType, query, type, sort, reverse):
     #print(query) #debug
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
-        for iem in file:
-            if type == 'all': #search all fields if type isn't specified
-                if query in iem['rank'].lower() or query in iem['name'].lower() or query in iem['signature'].lower() or query in iem['comment'].lower() or query in iem['tone'].lower() or query in iem['technical'].lower() or query in iem['graph'].lower() or query in iem['setup'].lower() or query in iem['basedOn'].lower():
-                    output.append(iem)
-            else:
-                #print(iem[type]) #debug
-                if query in iem[type].lower():
-                    output.append(iem)
+
+    elif musicType == "Headphones":
+        file = json.loads(open("HeadphoneList.json").read())
+
+    for device in file:
+        if type == 'all': #search all fields if type isn't specified
+            if query in device['rank'].lower() or query in device['name'].lower() or query in device['signature'].lower() or query in device['comment'].lower() or query in device['tone'].lower() or query in device['technical'].lower() or query in device['graph'].lower() or query in device['setup'].lower() or query in device['basedOn'].lower():
+                output.append(device)
+        else:
+            #print(device[type]) #debug
+            if query in device[type].lower():
+                output.append(device)
+    
     json.dump(output, open("searchResults.json", "w"))
     #print(musicType, sort, reverse) #debug
     listSort('searchResults.json', sort, reverse)

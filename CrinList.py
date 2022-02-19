@@ -17,5 +17,7 @@ def main():
         find(getType(), getQuery(), getQuerySearch(), getSort2(), getReversed2())
     elif cmd == "-f" or cmd == "--filter":
         pass #TODO
+    elif cmd == "-u" or cmd == "--update":
+        pass #TODO
 
 main()

@@ -1,4 +1,5 @@
 from ParseIntoJSON import parse
+from actions import listSort
 
 def createIEM():
     try:
@@ -6,6 +7,7 @@ def createIEM():
     except FileNotFoundError:
         #print('IEMList.json not found. Creating...') #debug
         parse('IEM.html', 'IEMList.json')
+        listSort('IEM', 'rank', False)
     
 
 def createHeadphones():
@@ -14,3 +16,4 @@ def createHeadphones():
     except FileNotFoundError:
         #print('HeadphoneList.json not found. Creating...') #debug
         parse('Headphone.html', 'HeadphoneList.json')
+        listSort('Headphones', 'rank', False)
