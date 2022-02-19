@@ -14,9 +14,7 @@ def main():
     elif cmd == "-s" or cmd == "--sort":
         listSort(getType(), getSort(), getReversed())
     elif cmd == "-se" or cmd == "--search":
-        find(getType(), getQuery(), getQuerySearch(), getSort2(), getReversed2())
-    elif cmd == "-f" or cmd == "--filter":
-        pass #TODO
+        find(getType(), getQuery(), getQuerySearch(), getSort2(), getReversed2(), getStrict())
     elif cmd == "-u" or cmd == "--update":
         pass #TODO
 

@@ -51,3 +51,9 @@ def getReversed2():
         return bool(sys.argv[6])
     except IndexError:
         return False
+
+def getStrict():
+    try:
+        return bool(sys.argv[7])
+    except IndexError:
+        return False
