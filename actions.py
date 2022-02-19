@@ -79,6 +79,8 @@ def intSort(val):
     try:
         return int(val)
     except:
+        if val == "1410 (8SL)<br>2180 (Gemini)<br>2560 (Anole VX)": #exception for the qdc 8SL which has multiple prices
+            return 1410
         return -1*math.inf
 
 def stringSort(val):
