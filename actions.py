@@ -153,7 +153,10 @@ def find(musicType, query, type, sort, reverse, strict):
                 output.append(device)
         else:
             #print(device[type]) #debug
-            if query in device[type].lower():
+            if strict:
+                if query == device[type].lower():
+                    output.append(device)
+            elif query in device[type].lower():
                 output.append(device)
     
     json.dump(output, open("searchResults.json", "w"))
