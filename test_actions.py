@@ -1,14 +1,14 @@
 import pytest
 import actions
 
-def determineColorTest():
+def test_determineColor():
     assert actions.determineColor("S+") == "red"
     assert actions.determineColor("A") == "yellow"
     assert actions.determineColor("B-") == "green"
     assert actions.determineColor("C-") == "cyan"
     assert actions.determineColor("D+") == "blue"
 
-def rankNumberTest():
+def test_rankNumber():
     assert actions.rankNumber("S+") == 1
     assert actions.rankNumber("A") == 5
     assert actions.rankNumber("B-") == 9
@@ -16,5 +16,5 @@ def rankNumberTest():
     assert actions.rankNumber("D+") == 13
     assert actions.rankNumber("Null") == 0
 
-determineColorTest()
-rankNumberTest()
+test_determineColor()
+test_rankNumber()
