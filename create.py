@@ -1,5 +1,5 @@
 from ParseIntoJSON import parse
-from actions import listSort
+from actions import *
 
 def createIEM():
     try:
