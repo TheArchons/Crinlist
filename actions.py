@@ -87,7 +87,6 @@ def stringSort(val):
     return len(val)
 
 def printList(musicType):
-    #print(musicType) #debug
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
     elif musicType == "Headphones":
@@ -96,7 +95,6 @@ def printList(musicType):
         file = json.loads(open(musicType).read())
     for device in file:
         stars = device['stars']*"*"
-        #print(device['rank']) #debug
         print(termcolor.colored(device['rank'] + " " + stars + " " + device['name'], color=determineColor(device['rank'])), end=" ")
         print(device['price'] + " " + device['signature'] + " " + device['comment'], end=" ")
         print(termcolor.colored(device['tone'], color=determineColor(device['tone'])), end=" ")
@@ -112,7 +110,6 @@ def listSort(musicType, sort, reverse):
     else:
         file = json.loads(open(musicType).read())
     
-    #print(file) #debug
     if sort == "rank" or sort == "tone" or sort == "technical":
         file.sort(key=lambda x: rankNumber(x[sort]), reverse=not reverse)
     elif sort == "stars":
@@ -131,18 +128,12 @@ def listSort(musicType, sort, reverse):
         with open("HeadphoneList.json", "w") as outfile:
             json.dump(file, outfile)
     else:
-        #print(musicType) #debug
-        #print(file) #debug
         with open(musicType, "w") as outfile:
             json.dump(file, outfile)
-    #print(file)
-    #json.dump(file, open(musicType, "w"))
-    #json.dump(file, open("IEMList.json", "w"))
 
 def find(musicType, query, type, sort, reverse, strict):
     query = query.lower()
     output = []
-    #print(query) #debug
     if musicType == "IEM":
         file = json.loads(open("IEMList.json").read())
 
@@ -154,7 +145,6 @@ def find(musicType, query, type, sort, reverse, strict):
             if query in device['rank'].lower() or query in device['name'].lower() or query in device['signature'].lower() or query in device['comment'].lower() or query in device['tone'].lower() or query in device['technical'].lower() or query in device['graph'].lower() or query in device['setup'].lower() or query in device['basedOn'].lower():
                 output.append(device)
         else:
-            #print(device[type]) #debug
             if strict:
                 if query == device[type].lower():
                     output.append(device)
@@ -162,7 +152,6 @@ def find(musicType, query, type, sort, reverse, strict):
                 output.append(device)
     
     json.dump(output, open("searchResults.json", "w"))
-    #print(musicType, sort, reverse) #debug
     listSort('searchResults.json', sort, reverse)
     printList("searchResults.json")
 
@@ -177,5 +166,4 @@ def update(type):
     elif type == "all":
         os.remove("IEMList.json")
         os.remove("HeadphoneList.json")
-        createIEM()
         print("updated")

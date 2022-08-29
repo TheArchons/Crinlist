@@ -6,7 +6,6 @@ def main():
     createIEM() #creates JSON of IEM if it doesn't exist
     createHeadphones() #creates JSON of headphones if it doesn't exist
     cmd = getCmd()
-    #print(cmd) #debug
     if cmd == "-h" or cmd == "--help":
         printHelp()
     elif cmd == "-l" or cmd == "--list":

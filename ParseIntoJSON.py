@@ -22,7 +22,6 @@ def parse(source, output):
                 basedOn = 'Third party unit'
                 noteWeight = ''
                 graph = 'https://crinacle.com/graphs/iems/tiandirenhe-td1/'
-                #saveFile.write(rank + ',' + str(stars) + ',' + name + ',' + price + ',' + signature + ',' + comment + ',' + tone + ',' + technical + ',' + setup + ',' + basedOn + ',' + noteWeight + '\n')
                 dict['rank'] = rank
                 dict['stars'] = stars
                 dict['name'] = name
@@ -63,10 +62,8 @@ def parse(source, output):
             dict['noteWeight'] = noteWeight
             dict['graph'] = graph
             data.append(dict)
-            #saveFile.write(rank + ',' + str(stars) + ',' + name + ',' + price + ',' + signature + ',' + comment + ',' + tone + ',' + technical + ',' + setup + ',' + basedOn + ',' + noteWeight + '\n')
 
     data = data[math.ceil(len(data)/2):]
-    #print(data) #debug
     json.dump(data, saveFile)
     file.close()
     saveFile.close()

@@ -2,7 +2,6 @@ import sys
 
 def getCmd():
     try:
-        #print(sys.argv[1]) #debug
         return sys.argv[1]
     except IndexError:
         return '-h'
