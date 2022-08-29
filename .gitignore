@@ -1,3 +1,11 @@
 __pycache__/
 .pytest_cache/
 .benchmarks/
+
+IEM.html
+Headphone.html
+
+HeadphoneList.json
+IEMList.json
+
+searchResults.json

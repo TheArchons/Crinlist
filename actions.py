@@ -4,6 +4,7 @@ import math
 import re
 import os
 from create import *
+from requests import get
 
 def determineColor(rank):
     switchDict = {
@@ -155,15 +156,22 @@ def find(musicType, query, type, sort, reverse, strict):
     listSort('searchResults.json', sort, reverse)
     printList("searchResults.json")
 
+def updateIEM():
+    os.remove("IEMList.json")
+    os.remove("IEM.html")
+
+def updateHeadphones():
+    os.remove("HeadphoneList.json")
+    os.remove("Headphone.html")
+    
 
 def update(type):
     if type == "IEM":
-        os.remove("IEMList.json")
-        print("updated")
+        updateIEM()
     elif type == "Headphones":
-        os.remove("HeadphoneList.json")
-        print("updated")
+        updateHeadphones()
     elif type == "all":
-        os.remove("IEMList.json")
-        os.remove("HeadphoneList.json")
-        print("updated")
+        updateIEM()
+        updateHeadphones()
+
+    print("updated")
