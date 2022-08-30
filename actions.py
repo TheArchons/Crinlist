@@ -138,7 +138,7 @@ def find(musicType, query, type, sort, reverse, strict):
                     output.append(device)
             elif query in device[type].lower():
                 output.append(device)
-    
+
     json.dump(output, open("searchResults.json", "w"))
     listSort('searchResults.json', sort, reverse)
     printList("searchResults.json")
@@ -150,7 +150,7 @@ def updateIEM():
 def updateHeadphones():
     os.remove("HeadphoneList.json")
     os.remove("Headphone.html")
-    
+
 
 def update(type):
     if type == "IEM":
@@ -160,5 +160,8 @@ def update(type):
     elif type == "all":
         updateIEM()
         updateHeadphones()
+    else:
+        print("Invalid type")
+        return
 
-    print("updated")
+    print("Updated " + type)
