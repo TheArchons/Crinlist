@@ -29,42 +29,28 @@ def determineColor(rank):
     return switchDict[rank]
 
 def rankNumber(rank):
-    if rank == "S+":
-        return 1
-    elif rank == "S":
-        return 2
-    elif rank == "S-":
-        return 3
-    elif rank == "A+":
-        return 4
-    elif rank == "A":
-        return 5
-    elif rank == "A-":
-        return 6
-    elif rank == "B+":
-        return 7
-    elif rank == "B":
-        return 8
-    elif rank == "B-":
-        return 9
-    elif rank == "C+":
-        return 10
-    elif rank == "C":
-        return 11
-    elif rank == "C-":
-        return 12
-    elif rank == "D+":
-        return 13
-    elif rank == "D":
-        return 14
-    elif rank == "D-":
-        return 15
-    elif rank == "E":
-        return 16
-    elif rank == "F":
-        return 17
-    else:
-        return 0
+    switchDict = {
+        "S+" : 1,
+        "S" : 2,
+        "S-" : 3,
+        "A+" : 4,
+        "A" : 5,
+        "A-" : 6,
+        "B+" : 7,
+        "B" : 8,
+        "B-" : 9,
+        "C+" : 10,
+        "C" : 11,
+        "C-" : 12,
+        "D+" : 13,
+        "D" : 14,
+        "D-" : 15,
+        "E" : 16,
+        "F" : 17
+    }
+    if rank in switchDict:
+        return switchDict[rank]
+    return 0
 
 def printHelp():
     print("CrinList - A CLI for crinacle.com")
@@ -131,6 +117,7 @@ def listSort(musicType, sort, reverse):
     else:
         with open(musicType, "w") as outfile:
             json.dump(file, outfile)
+    printList(musicType)
 
 def find(musicType, query, type, sort, reverse, strict):
     query = query.lower()
